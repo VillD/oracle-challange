@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/Encrypter/assets/favicon.ico" type="image/x-icon" />
+    <title>Challange</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      type=""
+      media="" />
+  </head>
+  <body>
+    <div class="circle">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <header class="header">
+      <a class="logo-alura" href="">
+        <img src="assets/Vector.svg" alt="logo-alura" />
+      </a>
+    </header>
+    <main>
+      <div class="content">
+        <div class="content-input">
+          <section class="square-glass">
+            <textarea
+              name=""
+              id="textIngresado"
+              placeholder="Ingrese el texto aquí"></textarea>
+
+            <div class="warning">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <p class="warning-text">Solo letras minúsculas y sin acentos</p>
+            </div>
+          </section>
+
+          <div class="form-control">
+            <button class="encriptar" id="encriptar">
+              Encriptar <i class="fa-solid fa-lock"></i>
+            </button>
+
+            <button class="desencriptar" id="desencriptar">
+              <div class="desencriptar-copy"></div>
+              Desencriptar <i class="fa-solid fa-lock-open"></i>
+            </button>
+          </div>
+        </div>
+
+        <section class="rectangle-glass">
+          <div class="message_warning">
+            <img src="assets/image-warning.svg" alt="" />
+            <div class="message">
+              <p class="message-title">Ningún mensaje fue encontrado</p>
+              <p class="message-paragraph">
+                Ingresa el texto que desees encriptar o desencriptar
+              </p>
+            </div>
+          </div>
+
+          <div class="message_sent showMe">
+            <textarea name="" id="txtSent" class="txtSent"></textarea>
+            <p class="text-copiado">¡Copiado!</p>
+            <button class="copiar" id="copiar">Copiar</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <p class="footer-text">© 2023 Daniel Rodriguez</p>
+      <section class="icons">
+        <a href="https://github.com/VillD/oracle-challange.git" target="_blank"
+          ><i class="fa-brands fa-github"></i
+        ></a>
+        <a href="https://www.instagram.com/ddaniel.vill/" target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/daniel-rodriguez-villegas-349b01240/"
+          target="_blank"
+          ><i class="fa-brands fa-linkedin-in"></i
+        ></a>
+      </section>
+    </footer>
+    <script>
+      let txtIngresado = document.getElementById('textIngresado'),
+        txtSent = document.getElementById('txtSent'),
+        btnEncriptar = document.getElementById('encriptar'),
+        btnDesencriptar = document.getElementById('desencriptar'),
+        btnCopiar = document.getElementById('copiar'),
+        messageWarning = document.querySelector('.message_warning'),
+        messageSent = document.querySelector('.message_sent'),
+        txtCopiado = document.querySelector('.text-copiado')
+
+      let matrizVowels = [
+        ['e', 'enter'],
+        ['i', 'imes'],
+        ['a', 'ai'],
+        ['o', 'ober'],
+        ['u', 'ufat'],
+      ]
+      btnEncriptar.addEventListener('click', () => {
+        let Numbs = /\d/g,
+          CharError = /\W/g,
+          mayus = /[A-Z]/g,
+          prueba = /[a-e-i-o-u]/g,
+          withNumbs = Numbs.test(txtIngresado.value),
+          withCharError = CharError.test(txtIngresado.value),
+          withMayus = mayus.test(txtIngresado.value),
+          withPrueba = prueba.test(txtIngresado.value)
+
+        if (withNumbs) {
+          alert('El texto ingresado tiene numeros')
+        } else if (withCharError) {
+          alert('El texto ingresado tiene caracteres inconrrectos')
+        } else if (withMayus) {
+          alert('El texto ingresado tiene mayusculas')
+        } else if (!txtIngresado.value) {
+          alert('Se requiere texto')
+        } else if (!withPrueba) {
+          messageWarning.classList.add('showMe')
+          messageSent.classList.remove('showMe')
+          txtSent.value = txtIngresado.value
+        } else {
+          messageWarning.classList.add('showMe')
+          messageSent.classList.remove('showMe')
+
+          let txtOriginal = txtIngresado.value
+          for (let i = 0; i < matrizVowels.length; i++) {
+            if (txtIngresado.value.includes(matrizVowels[i][0])) {
+              txtIngresado.value = txtIngresado.value.replaceAll(
+                matrizVowels[i][0],
+                matrizVowels[i][1]
+              )
+            }
+          }
+          txtSent.value = txtIngresado.value
+          txtIngresado.value = txtOriginal
+        }
+      })
+
+      btnDesencriptar.addEventListener('click', () => {
+        let Numbs = /\d/g,
+          CharError = /\W/g,
+          mayus = /[A-Z]/g,
+          prueba = /[a-e-i-o-u]/g,
+          withNumbs = Numbs.test(txtIngresado.value),
+          withCharError = CharError.test(txtIngresado.value),
+          withMayus = mayus.test(txtIngresado.value),
+          withPrueba = prueba.test(txtIngresado.value)
+
+        if (withNumbs) {
+          alert('El texto ingresado tiene numeros')
+        } else if (withCharError) {
+          alert('El texto ingresado tiene caracteres inconrrectos')
+        } else if (withMayus) {
+          alert('El texto ingresado tiene mayusculas')
+        } else if (!txtIngresado.value) {
+          alert('Se requiere texto')
+        } else {
+          messageWarning.classList.add('showMe')
+          messageSent.classList.remove('showMe')
+
+          for (let i = 0; i < matrizVowels.length; i++) {
+            if (txtIngresado.value.includes(matrizVowels[i][0])) {
+              txtIngresado.value = txtIngresado.value.replaceAll(
+                matrizVowels[i][1],
+                matrizVowels[i][0]
+              )
+              console.log(txtSent.value)
+            }
+          }
+          txtSent.value = txtIngresado.value
+          txtIngresado.value = ''
+        }
+      })
+
+      btnCopiar.addEventListener('click', () => {
+        setTimeout(function () {
+          console.log('repite')
+          txtCopiado.style.display = 'block'
+        }, 10)
+        txtCopiado.style.display = 'none'
+        txtSent.select()
+        navigator.clipboard.writeText(txtSent.value)
+      })
+
+      setInterval(function () {
+        if (!txtSent.value) {
+          messageWarning.classList.remove('showMe')
+          messageSent.classList.add('showMe')
+        }
+      }, 1000)
+    </script>
+  </body>
+</html>
