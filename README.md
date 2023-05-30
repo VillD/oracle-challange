@@ -44,6 +44,7 @@ Los usuarios deben ser capaces de:
 - CSS custom properties
 - Flexbox
 - Media queries
+- DOM
 
 ### Desarrollo continuo
 
