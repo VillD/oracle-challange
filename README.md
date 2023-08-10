@@ -59,7 +59,7 @@ Durante la ejecución del código, se utilizaron varios métodos en JavaScript, 
 
 - Linkedin - [Daniel Villegas](https://www.linkedin.com/in/daniel-rodriguez-villegas-349b01240/)
 - Instagram - [@ddaniel.vill](https://www.instagram.com/ddaniel.vill/)
-
+- CodePen - [@dDesing](https://codepen.io/dDesing)
 
 
 
